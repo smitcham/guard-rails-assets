@@ -59,9 +59,9 @@ module Guard
       config.assets.digests = {}
 
       target = File.join(::Rails.public_path, config.assets.prefix)
-      static_compiler = Sprockets::StaticCompiler.new(env, target, :digest => config.assets.digest)
+      static_compiler = Sprockets::StaticCompiler.new(env, target, config.assets.precompile, :digest => config.assets.digest)
 
-      manifest = static_compiler.precompile(config.assets.precompile)
+      manifest = static_compiler.compile()
       manifest_path = config.assets.manifest || target
       FileUtils.mkdir_p(manifest_path)
 
